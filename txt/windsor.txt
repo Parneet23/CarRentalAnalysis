@@ -1,0 +1,921 @@
+For the mentioned location windsor we have around 215 car rental options
+XXAR
+You Click. We Pick.
+Vehicle determined upon pick-up (Compact or Larger) or similar
+68.57 CAD
+Automatic
+5 People
+2 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+CFAR
+Compact SUV
+Toyota C-HR or similar
+69.28 CAD
+Automatic
+5 People
+3 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+CCAR
+Compact
+Nissan Versa or similar
+69.54 CAD
+Automatic
+5 People
+2 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+ECAR
+Economy
+Chevrolet Spark or similar
+69.55 CAD
+Automatic
+4 People
+2 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+ICAR
+Intermediate
+Kia Forte or similar
+69.55 CAD
+Automatic
+5 People
+3 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+CFDR
+Compact SUV AWD
+Hyundai Kona AWD or similar
+71.79 CAD
+Automatic
+5 People
+3 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+FCAR
+Full Size
+Toyota Camry or similar
+73.04 CAD
+Automatic
+5 People
+4 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+SCAR
+Standard
+Volkswagen Jetta or similar
+73.08 CAD
+Automatic
+5 People
+4 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+SPAR
+Small Pickup
+Chevy Colorado or similar
+76.82 CAD
+Automatic
+4 People
+3 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+PCAR
+Premium
+Nissan Maxima or similar
+79.33 CAD
+Automatic
+5 People
+4 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+PPAR
+1/2 Ton Pickup
+Chevrolet Siverado 1500 Crew Cab or similar
+79.33 CAD
+Automatic
+5 People
+4 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+PXAR
+Premium Special
+Audi A3 and BMW 2 Series Gran Coupe or similar
+81.21 CAD
+Automatic
+5 People
+5 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+IFAR
+Intermediate SUV
+Toyota RAV4 or similar
+81.35 CAD
+Automatic
+5 People
+4 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+GXAR
+Full Size Elite
+Audi A5 Sportback or similar
+81.83 CAD
+Automatic
+5 People
+3 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+LCAR
+Luxury
+Audi A4 and BMW 3 Series or similar
+86.86 CAD
+Automatic
+5 People
+4 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+SFAR
+Standard SUV
+Ford Edge or similar
+88.87 CAD
+Automatic
+5 People
+5 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+FJAR
+Jeep Wrangler 4 door
+Jeep Wrangler Unlimited or similar
+97.67 CAD
+Automatic
+5 People
+5 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+PGAR
+Premium Crossover
+Dodge Durango or similar
+107.03 CAD
+Automatic
+7 People
+3 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+MVAR
+7 Passenger Minivan
+Dodge Grand Caravan or similar
+112.66 CAD
+Automatic
+7 People
+5 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+FFAR
+Full Size SUV
+Chevy Tahoe or similar
+123.94 CAD
+Automatic
+7 People
+3 Bags
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
