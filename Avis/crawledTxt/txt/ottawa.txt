@@ -1,0 +1,130 @@
+Intermediate SUV
+Ford Escape or similar
+4 Door
+5 seats
+A/C
+Automatic
+1 Large Bag
+1 Small Bag
+C$62.00
+
+Economy
+Mitsubishi Mirage or similar
+4 Door
+4 seats
+A/C
+Automatic
+1 Large Bag
+1 Small Bag
+C$55.00
+
+Compact
+Nissan Versa or similar
+4 Door
+5 seats
+A/C
+Automatic
+1 Large Bag
+2 Small Bags
+C$55.00
+
+Full-Size Pickup
+Ford F150 Pick Up or similar
+4 Door
+5 seats
+A/C
+Automatic
+4 Large Bags
+
+C$55.10
+
+Intermediate
+Hyundai Elantra or similar
+4 Door
+5 seats
+A/C
+Automatic
+1 Large Bag
+2 Small Bags
+C$58.00
+
+Mystery Car
+Mystery Car or similar
+
+
+A/C
+Automatic
+
+
+C$60.00
+
+Standard
+Chevrolet Malibu or similar
+4 Door
+5 seats
+A/C
+Automatic
+1 Large Bag
+2 Small Bags
+C$62.00
+
+Full-Size
+Chevrolet Malibu or similar
+4 Door
+5 seats
+A/C
+Automatic
+1 Large Bag
+3 Small Bags
+C$62.00
+
+Luxury
+Chrysler 300S or similar
+4 Door
+5 seats
+A/C
+Automatic
+2 Large Bags
+2 Small Bags
+C$65.00
+
+Standard SUV
+Ford Edge or similar
+4 Door
+5 seats
+A/C
+Automatic
+2 Large Bags
+2 Small Bags
+C$65.00
+
+Avis Signature Series
+Audi Q5 or similar
+4 Door
+5 seats
+A/C
+Automatic
+1 Large Bag
+2 Small Bags
+C$75.00
+
+Full-Size SUV
+Ford Explorer or similar
+4 Door
+7 seats
+A/C
+Automatic
+1 Large Bag
+3 Small Bags
+C$145.00
+
+Minivan
+Dodge Grand Caravan or similar
+4 Door
+7 seats
+A/C
+Automatic
+3 Large Bags
+2 Small Bags
+C$145.00
+
