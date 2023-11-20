@@ -1,0 +1,161 @@
+Compact SUV
+Toyota C-HR or similar
+Automatic
+5 People
+3 Bags
+67.46
+
+Small Pickup
+Chevy Colorado or similar
+Automatic
+4 People
+3 Bags
+73.81
+
+1/2 Ton Pickup
+Chevrolet Siverado 1500 Crew Cab or similar
+Automatic
+5 People
+4 Bags
+75.40
+
+Economy
+Chevrolet Spark or similar
+Automatic
+4 People
+2 Bags
+76.56
+
+You Click. We Pick.
+Vehicle determined upon pick-up (Compact or Larger) or similar
+Automatic
+5 People
+2 Bags
+76.61
+
+Full Size
+Toyota Camry or similar
+Automatic
+5 People
+4 Bags
+77.11
+
+Standard
+Volkswagen Jetta or similar
+Automatic
+5 People
+4 Bags
+77.18
+
+Intermediate
+Kia Forte or similar
+Automatic
+5 People
+3 Bags
+77.63
+
+Compact
+Nissan Versa or similar
+Automatic
+5 People
+2 Bags
+77.73
+
+Intermediate SUV
+Toyota RAV4 or similar
+Automatic
+5 People
+4 Bags
+79.37
+
+Premium
+Nissan Maxima or similar
+Automatic
+5 People
+4 Bags
+79.61
+
+Premium Special
+Audi A3 and BMW 2 Series Gran Coupe or similar
+Automatic
+5 People
+5 Bags
+79.61
+
+Luxury
+Audi A4 and BMW 3 Series or similar
+Automatic
+5 People
+4 Bags
+85.86
+
+Full Size Elite
+Audi A5 Sportback or similar
+Automatic
+5 People
+3 Bags
+90.15
+
+Standard SUV
+Ford Edge or similar
+Automatic
+5 People
+5 Bags
+92.58
+
+Standard Elite SUV
+Audi Q3 or similar
+Automatic
+5 People
+3 Bags
+96.17
+
+Premium Elite SUV
+Cadillac XT5 or similar
+Automatic
+5 People
+4 Bags
+98.74
+
+7 Passenger Minivan
+Dodge Grand Caravan or similar
+Automatic
+7 People
+5 Bags
+100.0
+
+Premium Crossover
+Dodge Durango or similar
+Automatic
+7 People
+3 Bags
+101.8
+
+8 Passenger Minivan
+Toyota Sienna or similar
+Automatic
+8 People
+5 Bags
+115.0
+
+Full Size SUV
+Chevy Tahoe or similar
+Automatic
+7 People
+3 Bags
+126.7
+
+American Muscle Car
+Ford Mustang GT, Chevrolet Camaro SS or similar
+Automatic
+4 People
+2 Bags
+196.3
+
+Convertible
+Ford Mustang or similar
+Automatic
+4 People
+2 Bags
+202.3
+
