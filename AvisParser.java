@@ -16,7 +16,7 @@ import org.jsoup.select.Elements;
 
 public class AvisParser {
 	
-    public void parseAvisWebsite (File folder, String filename, Dictionary dict) {
+    public void parseAvisWebsite (File folder, String filename, Dictionary dict, int key) {
 		try {
 			String loc=folder+"\\"+filename;
 			BufferedReader bfReader = new BufferedReader(new FileReader(loc));
@@ -40,7 +40,6 @@ public class AvisParser {
 		    String output="";
 		    int itr2=0;
 		    int itr1=0;
-		    int itr3=1;
 		    for(int itr=0; itr<car_option.size()&&itr1<facilities.size()&&itr2<price.size(); itr++) {
 		    	FrequencyCount freqCount=new FrequencyCount();
 		    	freqCount.websiteName="https://www.avis.ca";
@@ -81,8 +80,8 @@ public class AvisParser {
 		    	freqCount.price=Float.parseFloat(str);
 		    	itr2++;
 		    	output += "\n";
-		    	dict.put(itr3, freqCount);
-		    	itr3++;
+		    	dict.put(key, freqCount);
+		    	key++;
 		    }
 		    bw.write(output);
 		    bw.close();
@@ -91,13 +90,13 @@ public class AvisParser {
 			e.printStackTrace();
 		}
 	}
-	public void listFileNameForFolder(File folder, Dictionary dictObject) throws IOException {
+	public void listFileNameForFolder(File folder, Dictionary dictObject, int key) throws IOException {
 		//Iterating the folder and parsing files present inside the folder 
 		for (File fileName : folder.listFiles()) {
 	        if (fileName.isDirectory()) {
 	        	continue;
 	        } else {
-	        	parseAvisWebsite(folder,fileName.getName(), dictObject);
+	        	parseAvisWebsite(folder,fileName.getName(), dictObject, key);
 	            
 	        }
 	    }
