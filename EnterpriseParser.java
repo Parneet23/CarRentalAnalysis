@@ -17,30 +17,42 @@ import org.jsoup.select.Elements;
 public class EnterpriseParser {
 	public void convertFileToWebPage (File folder, String filename, Dictionary dict, int key) {
 		try {
-			FrequencyCount freqCount=new FrequencyCount();
-	    	freqCount.websiteName="https://www.enterprise.ca";
+			//location from where we need to access the file
 			String loc=folder+"\\"+filename;
+			//Creating BufferedReader object for reading the content of the file 
 			BufferedReader bfReader = new BufferedReader(new FileReader(loc));
 			String readFromFile;
 			String fileContents = "";
+			//Extracting the name of the file by removing the extension and storing in a variable
 			String fileName = filename.substring(0,filename.lastIndexOf("."));
+			//Reading content of file line by line
 			while((readFromFile = bfReader.readLine()) != null) {
 				fileContents += "\n" + readFromFile;
 			}
+			//Creating html folder where we will convert txt file to html and store in the location
 			String file=folder+"\\html\\"+fileName+".html";
+			//Creating txt folder where we will store the parsed information which is required for further analysis
 			String outFile=folder + "\\txt\\"+fileName+ ".txt";
+			//Creating BufferedWriter object for writing the html file
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		    writer.write(fileContents);
 		    writer.close();
 		    File input = new File(file);
 		    Document doc = Jsoup.parse(input, "UTF-8", "");
 		    BufferedWriter bw = new BufferedWriter(new FileWriter(outFile));
+		    //From the converted html file extracting the Elements which are required for further analysis
 		    Elements car_price=doc.getElementsByClass("pricing-details__price-total");
 		    String output="";
 		    int itr2=0;
 		    Elements summary_containers = doc.getElementsByClass("vehicle-item_summary-container");
+		   //Storing the parsed content in FrequencyCount object along with file
+		   //The one stored in FrequencyCount object will be used for counting the word frequency
 		    for(int itr=0; itr<summary_containers.size(); itr++) {
+		    	 FrequencyCount freqCount=new FrequencyCount();
+		    	 freqCount.websiteName="https://www.enterprise.ca";
 		    	 output += summary_containers.get(itr).select("h2").text() + "\n";
+		    	 freqCount.pickUpLocation = fileName;
+		    	 output += "Pick up location: " + fileName + "\n";
 		    	 freqCount.carType=summary_containers.get(itr).select("h2").text();
 		    	 output += summary_containers.get(itr).getElementsByClass("vehicle-item__models").text() + "\n";
 		    	 freqCount.carModel=summary_containers.get(itr).getElementsByClass("vehicle-item__models").text();
@@ -61,12 +73,14 @@ public class EnterpriseParser {
 		    	 String price=car_price.get(itr2).text();
 		    	 price=price.substring(0, 5);
 		    	 freqCount.price=Float.parseFloat(price);
+		    	 //Putting the integer key as key and freqCount object as value in dictionary 
 		    	 dict.put(key, freqCount);
 		    	 key++;
 		    	 output += price + "\n";;
 		    	 output += "\n";
 		    	 itr2++;
 		    }
+		    //writing the parsed details in the output file
 		    bw.write(output);
 		    bw.close();
 		}

@@ -15,31 +15,43 @@ import org.jsoup.select.Elements;
 public class BudgetParser {
 	public void convertFileToWebPage (File folder, String filename, Dictionary dict, int key) {
 		try {
+			//location from where we need to access the file
 			String loc=folder+"\\"+filename;
+			//Creating BufferedReader object for reading the content of the file 
 			BufferedReader bfReader = new BufferedReader(new FileReader(loc));
 			String readFromFile;
 			String fileContents = "";
+			//Extracting the name of the file by removing the extension and storing in a variable
 			String fileName = filename.substring(0,filename.lastIndexOf("."));
+			//Reading content of file line by line
 			while((readFromFile = bfReader.readLine()) != null) {
 				fileContents += "\n" + readFromFile;
 			}
+			//Creating html folder where we will convert txt file to html and store in the location
 			String file=folder+"\\html\\"+fileName+".html";
+			//Creating txt folder where we will store the parsed information which is required for further analysis
 			String outFile=folder + "\\txt\\"+fileName+ ".txt";
+			//Creating BufferedWriter object for writing the html file
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		    writer.write(fileContents);
 		    writer.close();
 		    File input = new File(file);
 		    Document doc = Jsoup.parse(input, "UTF-8", "");
 		    BufferedWriter bw = new BufferedWriter(new FileWriter(outFile));
+		    //From the converted html file extracting the Elements which are required for further analysis
 		    Elements price = doc.getElementsByClass("payamntr");
 		    int itr1=0;
 		    int itr2=0;
 		    String output="";
 		    Elements car_option = doc.getElementsByClass("featured-car-fac-for-mob");
 		    Elements facilities = doc.getElementsByClass("available-car-fac hidden");
+		    //Storing the parsed content in FrequencyCount object along with file
+		    //The one stored in FrequencyCount object will be used for counting the word frequency
 		    for(int itr=0; itr<car_option.size()&&itr1<price.size()&&itr2<facilities.size(); itr++) {
 		    	FrequencyCount freqCount = new FrequencyCount();
 		    	freqCount.websiteName="https://www.budget.ca";
+		    	output += "Pick up location: "+ fileName + "\n";
+		    	freqCount.pickUpLocation = fileName;
 		    	output += car_option.get(itr).select("h4").text() + "\n";
 		    	freqCount.carType = car_option.get(itr).select("h4").text();
 		    	output += car_option.get(itr).getElementsByClass("feat-car-text-mob").text() + "\n";
@@ -85,7 +97,6 @@ public class BudgetParser {
 		    	itr2++;
 		    	itr1++;
 		    	dict.put(key, freqCount);
-		    	//System.out.println(key);
 		    	key+=1;
 		    	}
 		    bw.write(output);
