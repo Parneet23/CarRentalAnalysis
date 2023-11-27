@@ -8,6 +8,10 @@ import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 //Creating class to store parse information and storing them in dictionary for counting the frequency using website name
 public class ParserAndFrequencyCount {
 	String websiteName;
@@ -18,6 +22,7 @@ public class ParserAndFrequencyCount {
     int numberOfBags;
     int numberOfSeats;
     Dictionary dict;
+    Set<String> set= new HashSet<String>();
     
     //Constructor
 	public ParserAndFrequencyCount() {
@@ -54,6 +59,24 @@ public class ParserAndFrequencyCount {
 		bw.write(output);
 	    bw.close();
 	}
+        public void countCarModel() {
+		Iterator<String> it = set.iterator();
+		while (it.hasNext()) {
+			String str = it.next();
+			Enumeration<Integer> k = dict.keys();
+			FrequencyCount freqObject = new FrequencyCount();
+			int model = 0;
+			while (k.hasMoreElements()) {
+				int key = k.nextElement();
+				freqObject = (FrequencyCount) dict.get(key);
+				if (str.equals(freqObject.carModel)) {
+					model++;
+				}
+			}
+			if(model>0)
+			System.out.println("For " + str + " model we have " + model + " option(s)");
+		}
+	}
 	//For printing the dictionary and frequency of values present in dictionary based on website name
 	public void printDict(String fileLocation) throws IOException {
     	Enumeration<Integer> k = dict.keys();
@@ -82,16 +105,17 @@ public class ParserAndFrequencyCount {
 		int key = freqObject.getMaxKey();
 		AvisParser avisParserObject=new AvisParser();
 		File folder1 = new File("CarRent/avis/crawledTxt");
-		avisParserObject.listFileNameForFolder(folder1, freqObject.dict, key+1);
+		avisParserObject.listFileNameForFolder(folder1, freqObject.dict, key+1, freqObject.set);
 		key = freqObject.getMaxKey();
 		BudgetParser budgetParserObject=new BudgetParser();
 		File folder2 = new File("CarRent/budget/crawledTxt");
-		budgetParserObject.listFileNameForFolder(folder2, freqObject.dict, key+1);
+		budgetParserObject.listFileNameForFolder(folder2, freqObject.dict, key+1, freqObject.set);
 		EnterpriseParser enterpriseParserObject = new EnterpriseParser();
 		key = freqObject.getMaxKey();
 		File folder3 = new File("CarRent/enterprise/crawledTxt");
-		enterpriseParserObject.listFileNameForFolder(folder3, freqObject.dict, key+1);
+		enterpriseParserObject.listFileNameForFolder(folder3, freqObject.dict, key+1, freqObject.set);
 		freqObject.printDict("CarRent");
+		freqObject.countCarModel();
 	}
 	
 }
