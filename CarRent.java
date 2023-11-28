@@ -15,7 +15,7 @@ public class CarRent {
 		 String [] folderName= {"CarRent/avis/crawledTxt/txt","CarRent/budget/crawledTxt/txt","CarRent/enterprise/crawledTxt/txt"};
 		 try {
 			ParserAndFrequencyCount.entryPoint();
-			InvertedIndexing.invertRead(folderName, "montreal");;
+			InvertedIndexing.invertRead(folderName, "Montreal Trudeau Intl Airport","BMW X1");;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

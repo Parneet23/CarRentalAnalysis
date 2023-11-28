@@ -71,7 +71,7 @@ public class PageRanking {
 
 		try {
 			//get the websites name and their occuarances from the txt files
-			bReader = new BufferedReader(new FileReader("C:\\Users\\Dell\\eclipse-workspace\\ACCProject\\src\\package1\\count.txt"));
+			bReader = new BufferedReader(new FileReader("CarRent/count.txt"));
 			String line = bReader.readLine();
 			
 			//read the whole file line by line

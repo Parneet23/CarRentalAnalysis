@@ -64,11 +64,11 @@ public class ParserAndFrequencyCount {
 		while (it.hasNext()) {
 			String str = it.next();
 			Enumeration<Integer> k = dict.keys();
-			FrequencyCount freqObject = new FrequencyCount();
+			ParserAndFrequencyCount freqObject = new ParserAndFrequencyCount();
 			int model = 0;
 			while (k.hasMoreElements()) {
 				int key = k.nextElement();
-				freqObject = (FrequencyCount) dict.get(key);
+				freqObject = (ParserAndFrequencyCount) dict.get(key);
 				if (str.equals(freqObject.carModel)) {
 					model++;
 				}
