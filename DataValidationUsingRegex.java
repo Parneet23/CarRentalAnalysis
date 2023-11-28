@@ -2,17 +2,12 @@ package CarRent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-package package1;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,39 +25,73 @@ public class DataValidationUsingRegex {
 		return matcherObject.matches();
 	}
 
+	//method to return the difference in days between start and end date
+	public static long calculateDays(Date startDate, Date endDate) {
+		long timeInMiliseconds = endDate.getTime() - startDate.getTime();
+		long days = TimeUnit.DAYS.convert(timeInMiliseconds, TimeUnit.MILLISECONDS);
+		 return days;
+	}
+
+	// method to validate the date if it's correct
+	// accepts date and date format as input
+	// returns true if correct else false
+	public static boolean isDateCorrect(String dateTobeValidated, String dateFormat) {
+		try {
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
+
+			LocalDate localDate = LocalDate.parse(dateTobeValidated, dateFormatter);
+
+			return localDate.format(dateFormatter).equals(dateTobeValidated);
+
+		} catch (DateTimeParseException dateException) {
+
+			return false;
+		}
+	}
+
 	// main method
-	public static void dateValidation() throws DateException {
+	public static void main(String args[]) throws DateException {
 		try (Scanner scanner = new Scanner(System.in)) {
 			while (true) {
-				System.out.println("Enter your date here: ");
-				String inputStartDate = scanner.next();
-				System.out.println("Enter your  end date here: ");
-				String inputEndDate = scanner.next();
 				try {
-					if (!dataValidator(inputStartDate)) {
-						throw new DateException("Invalid Date Format for Start date");
-					}
-					if (!dataValidator(inputEndDate)) {
-						throw new DateException("Invalid Date Format for End date");
+					System.out.println("Enter your start date here: ");
+					String inputStartDate = scanner.next();
+					// check if date format and date is correct for start date input
+					if (!dataValidator(inputStartDate) || !isDateCorrect(inputStartDate, "MM/dd/yyyy")) {
+						throw new DateException("Invalid Date for start date. Please enter correct date and in correct format.");
 					}
 
+					System.out.println("Enter your  end date here: ");
+					String inputEndDate = scanner.next();
+					// check if date format and date is correct for end date input
+					if (!dataValidator(inputEndDate) || !isDateCorrect(inputEndDate, "MM/dd/yyyy")) {
+						throw new DateException("Invalid Date for end date. Please enter correct date and in correct format.");
+					}
+					
+					
 					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 					Date currentDate = new Date();
 					Date startDate = sdf.parse(inputStartDate);
 					Date endDate = sdf.parse(inputEndDate);
 
+					System.out.println("Days diffence is : " + calculateDays(startDate,endDate) );
+					
+					// condition to check if start date and end date is before today's date
 					if (startDate.before(currentDate) || endDate.before(currentDate)) {
 						throw new DateException("Entered date should be greater than today's date");
 					}
-					if (endDate.before(startDate) ) {
+					
+					// condition to check if end date is before start date
+					if (endDate.before(startDate)) {
 						throw new DateException("Start date should be less than End date");
 					}
-					System.out.println("Successfully validated the date!!");
 
-					break; // Break out of the loop if a valid and future date is entered
+					// when every check is passed, print success
+					System.out.println("Successfully validated the data!!");
+
+					break;
 				} catch (DateException | ParseException e) {
 					System.out.println(e.getMessage());
-					// Continue the loop to prompt the user again
 				}
 			}
 		}
