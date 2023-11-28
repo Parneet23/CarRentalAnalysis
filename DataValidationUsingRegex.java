@@ -40,7 +40,10 @@ public class DataValidationUsingRegex {
 				String inputEndDate = scanner.next();
 				try {
 					if (!dataValidator(inputStartDate)) {
-						throw new DateException("Invalid Date Format");
+						throw new DateException("Invalid Date Format for Start date");
+					}
+					if (!dataValidator(inputEndDate)) {
+						throw new DateException("Invalid Date Format for End date");
 					}
 
 					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
