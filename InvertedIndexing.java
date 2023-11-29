@@ -54,7 +54,7 @@ public class InvertedIndexing implements Serializable {
         }
 
         // Print the term and document ID for debug purposes
-      //  System.out.println("Inserted term '" + term + "' for document ID '" + documentId + "'");
+        System.out.println("Inserted term '" + term + "' for document ID '" + documentId + "'");
 
         if (current.documentIds == null) {
             current.documentIds = new ArrayList<>();
@@ -98,22 +98,29 @@ public class InvertedIndexing implements Serializable {
         // Iterate over each search term
         for (int i = 0; i < searchTerm.length; i++) {
             // Capture the value of i for the lambda expression
-            int index = i;
-
+            final int index = i;
+            
             // Split the current search term into individual words
-            String[] searchWords = searchTerm[index].toLowerCase().split("\\s+");
+            String[] searchWords = searchTerm[i].toLowerCase().split("\\s+");
 
             // Filter documents based on the presence of unique search words
             result = result.stream()
                     .filter(documentId -> {
                         int count = countUniqueMatchingWords(documentId, searchWords);
-                        return (index == 0 && count >= 3) || (index != 0 && count >= 2);
+                        boolean condition = (index == 0 && count >= 3) || (index != 0 && count >= 2);
+
+                       // System.out.println("Document ID: " + documentId + ", Search Term: " + searchTerm[index] +
+                        //        ", Matching Words Count: " + count + ", Condition: " + condition);
+
+                        return condition;
                     })
                     .collect(Collectors.toSet());
         }
 
         return new ArrayList<>(result);
     }
+
+
 
 
     private int countUniqueMatchingWords(String documentId, String[] searchWords) {
@@ -144,7 +151,7 @@ public class InvertedIndexing implements Serializable {
             return false;
         }
 
-        //System.out.println("Term '" + word + "' found for document " + documentId);
+       // System.out.println("Term '" + word + "' found for document " + documentId);
         return true;
     }
 
@@ -205,7 +212,7 @@ public class InvertedIndexing implements Serializable {
             return null;
         }
     }
-    public static  void invertindex(String folderpath, String...searchTerm1) {
+    public static  void invertindex(String folderpath,long days, String...searchTerm1) {
     	InvertedIndexing invertedIndex = new InvertedIndexing();
 
         // Specify the path to your folder
@@ -237,7 +244,7 @@ public class InvertedIndexing implements Serializable {
                 // Search again after loading
                 List<String> loadedResult = loadedIndex.search1(searchTerm1);
                 System.out.println("Documents containing the term '" + searchTerm1+" ' after loading: " + loadedResult);
-                compareDeals.bestdeals(loadedResult,searchTerm1);
+                compareDeals.bestdeals(loadedResult,days,searchTerm1);
                
             }
         } catch (IOException e) {
@@ -247,9 +254,9 @@ public class InvertedIndexing implements Serializable {
       
     }
     
-    public static void invertRead(String [] folderNames, String...searchTerm) {
+    public static void invertRead(String [] folderNames, long days,String...searchTerm ) {
     	for(String folderName: folderNames) {
-    		invertindex(folderName, searchTerm);
+    		invertindex(folderName,days, searchTerm);
     	}
     }
    public static void main(String[] args) throws IOException {
@@ -272,7 +279,7 @@ public class InvertedIndexing implements Serializable {
 
         // Search for terms
         String searchTerm = "Montreal Trudeau International Airport";
-        List<String> result = invertedIndex.search1(searchTerm.toLowerCase(),"Mitsubishi Mirage");
+        List<String> result = invertedIndex.search1(searchTerm.toLowerCase(),"Audi Q7");
 
         System.out.println("Documents containing the term '" + searchTerm + "': " + result);
 
@@ -285,7 +292,7 @@ public class InvertedIndexing implements Serializable {
             loadedIndex.root = loadedDataStructure;
 
             // Search again after loading
-            List<String> loadedResult = loadedIndex.search1(searchTerm.toLowerCase());
+            List<String> loadedResult = loadedIndex.search1(searchTerm.toLowerCase(),"Audi Q7");
             System.out.println("Documents containing the term '" + searchTerm + "' after loading: " + loadedResult);
             System.out.print(loadedResult);
             

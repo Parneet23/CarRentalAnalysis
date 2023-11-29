@@ -50,7 +50,8 @@ public class DataValidationUsingRegex {
 	}
 
 	// main method
-	public static void dateValidation() throws DateException {
+	public static long dateValidation() throws DateException {
+		long days;
 		try (Scanner scanner = new Scanner(System.in)) {
 			while (true) {
 				try {
@@ -77,7 +78,7 @@ public class DataValidationUsingRegex {
 						throw new DateException("Invalid Date for end date");
 					}
 
-					System.out.println("Days diffence is : " + calculateDays(startDate, endDate));
+					
 					
 					// condition to check if start date and end date is before today's date
 					if (endDate.before(currentDate)) {
@@ -90,13 +91,19 @@ public class DataValidationUsingRegex {
 					}
 
 					// when every check is passed, print success
-					System.out.println("Successfully validated the data!!");
-
+					days =calculateDays(startDate, endDate);
 					break;
+					
+					
+					//System.out.println("Successfully validated the data!!");
+
+					
 				} catch (DateException | ParseException e) {
 					System.out.println(e.getMessage());
 				}
+			
 			}
+			return days;
 		}
 	}
 }
