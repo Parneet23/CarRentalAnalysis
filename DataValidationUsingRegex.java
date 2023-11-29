@@ -50,13 +50,15 @@ public class DataValidationUsingRegex {
 	}
 
 	// main method
-	public static long dateValidation() throws DateException {
+	public static DataValidationUtility dateValidation() throws DateException {
+		DataValidationUtility du = new DataValidationUtility();
 		long days;
-		try (Scanner scanner = new Scanner(System.in)) {
+		 
 			while (true) {
 				try {
+					 Scanner scannerLocation = new Scanner(System.in);
 					System.out.println("Enter your start date here: ");
-					String inputStartDate = scanner.next();
+					String inputStartDate = scannerLocation.next();
 					// check if date format and date is correct for start date input
 					if (!dataValidator(inputStartDate) || !isDateCorrect(inputStartDate, "MM/dd/yyyy")) {
 						throw new DateException("Invalid Date for start date");
@@ -71,12 +73,13 @@ public class DataValidationUsingRegex {
 					}
 
 					System.out.println("Enter your  end date here: ");
-					String inputEndDate = scanner.next();
+					String inputEndDate = scannerLocation.next();
 					Date endDate = sdf.parse(inputEndDate);
 					// check if date format and date is correct for end date input
 					if (!dataValidator(inputEndDate) || !isDateCorrect(inputEndDate, "MM/dd/yyyy")) {
 						throw new DateException("Invalid Date for end date");
 					}
+				
 
 					
 					
@@ -92,6 +95,9 @@ public class DataValidationUsingRegex {
 
 					// when every check is passed, print success
 					days =calculateDays(startDate, endDate);
+					du.setStartdate(startDate.toString());
+					du.setEndDate(endDate.toString());
+					du.setIntervals(days);
 					break;
 					
 					
@@ -100,10 +106,13 @@ public class DataValidationUsingRegex {
 					
 				} catch (DateException | ParseException e) {
 					System.out.println(e.getMessage());
+					//scanner.close();
 				}
 			
-			}
-			return days;
+				return du;
+			//scanner.close();
+			
 		}
+			return du;
 	}
 }

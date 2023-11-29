@@ -1,5 +1,6 @@
-package carRentalAnalysis;
+package CarRent;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class CarMain {
+	public static DataValidationUtility du = new DataValidationUtility();
 	 private static Date parseDate(String dateStr) {
 	        try {
 	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -21,7 +23,8 @@ public class CarMain {
 	            return null;
 	        }
 	    }	 
-	 public static void main(String[] args) throws InterruptedException {
+	 public static void main(String[] args) throws InterruptedException, DateException {
+		 	
 		    Scanner scanner = new Scanner(System.in);
 		    MykSplayTreez splayTree = new MykSplayTreez();
 		    WordCompletion wordCompletion = new WordCompletion();
@@ -32,13 +35,15 @@ public class CarMain {
 		    initializeDictionaries(splayTree, airportDictionary, wordCompletion, airportSpellChecker);
 
 		    String userInput = getUserLocationInput(scanner);
-		    String pickUpDateInput = getUserPickUpDateInput(scanner);
-		    String dropDateInput = getUserDropDateInput(scanner);
+		    
+		    
+		    du = getUserPickUpDateInput(du);
+		   // String dropDateInput = getUserDropDateInput();
 
 		    if (shouldProceedWithAvailableData(scanner)) {
 		        processExistingData(scanner, wordCompletion, splayTree, airportDictionary, airportSpellChecker, userInput);
 		    } else {
-		        RentalCarScraping crawler = new RentalCarScraping(userInput,pickUpDateInput,dropDateInput);
+		        RentalCarScraping crawler = new RentalCarScraping(userInput,du.getStartdate(),du.getEndDate());
 		        generateAndScrapeDataFiles(crawler, userInput);
 		    }
 
@@ -54,15 +59,19 @@ public class CarMain {
 		    System.out.print("Enter your pick-up location: ");
 		    return scanner.nextLine().trim().toLowerCase();
 		}
-		private static String getUserPickUpDateInput(Scanner scanner) {
-		    System.out.print("Enter your pick-up date");
+		private static DataValidationUtility getUserPickUpDateInput(DataValidationUtility du) throws DateException {
+			long days =0;
+			du = DataValidationUsingRegex.dateValidation();
+			return du;
+		    //System.out.print("Enter your pick-up date");
+		    //return scanner.nextLine().trim().toLowerCase();
+		}
+	/*	private static String getUserDropDateInput(Scanner scanner) {
+		    //System.out.print("Enter your drop date: ");
+		    
 		    return scanner.nextLine().trim().toLowerCase();
 		}
-		private static String getUserDropDateInput(Scanner scanner) {
-		    System.out.print("Enter your drop date: ");
-		    return scanner.nextLine().trim().toLowerCase();
-		}
-
+*/
 		private static boolean shouldProceedWithAvailableData(Scanner scanner) {
 		    System.out.print("Do you want to proceed with available data or fetch latest data (y/n): ");
 		    String initialInput = scanner.nextLine().trim().toLowerCase();
@@ -91,6 +100,7 @@ public class CarMain {
 		}
 
 		private static void displayWordCompletionSuggestions(List<String> completionSuggestions) {
+			
 		    if (!completionSuggestions.isEmpty()) {
 		        System.out.println("Word completion suggestions:");
 		        for (String suggestion : completionSuggestions) {
@@ -132,6 +142,7 @@ public class CarMain {
 		}
 
 		private static void handleUserSelection(Scanner scanner, List<String> suggestions, String userInput,MySplayTree airportDictionary) {
+			String [] folderName= {"CarRent/avis/crawledTxt/txt","CarRent/budget/crawledTxt/txt","CarRent/enterprise/crawledTxt/txt"};
 			SearchCount searchCount = new SearchCount();
 		    System.out.print("Please select a suggestion: ");
 		    int suggestionInput = scanner.nextInt();
@@ -141,6 +152,13 @@ public class CarMain {
 		        userInput = suggestions.get(suggestionInput - 1);
 		    }
 		    searchCount.performSearchCounts(userInput);
+		    try {
+				ParserAndFrequencyCount.entryPoint();
+				InvertedIndexing.invertRead(folderName, du.getIntervals(),userInput);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		    System.out.println("Location is: " + userInput);
 		}
 

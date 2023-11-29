@@ -54,7 +54,7 @@ public class InvertedIndexing implements Serializable {
         }
 
         // Print the term and document ID for debug purposes
-        System.out.println("Inserted term '" + term + "' for document ID '" + documentId + "'");
+       // System.out.println("Inserted term '" + term + "' for document ID '" + documentId + "'");
 
         if (current.documentIds == null) {
             current.documentIds = new ArrayList<>();
@@ -107,7 +107,7 @@ public class InvertedIndexing implements Serializable {
             result = result.stream()
                     .filter(documentId -> {
                         int count = countUniqueMatchingWords(documentId, searchWords);
-                        boolean condition = (index == 0 && count >= 3) || (index != 0 && count >= 2);
+                        boolean condition = (index == 0 && count >= 2);
 
                        // System.out.println("Document ID: " + documentId + ", Search Term: " + searchTerm[index] +
                         //        ", Matching Words Count: " + count + ", Condition: " + condition);
@@ -212,7 +212,7 @@ public class InvertedIndexing implements Serializable {
             return null;
         }
     }
-    public static  void invertindex(String folderpath,long days, String...searchTerm1) {
+    public static  void invertindex(String folderpath,long days,String searchTerm1) {
     	InvertedIndexing invertedIndex = new InvertedIndexing();
 
         // Specify the path to your folder
@@ -254,9 +254,9 @@ public class InvertedIndexing implements Serializable {
       
     }
     
-    public static void invertRead(String [] folderNames, long days,String...searchTerm ) {
+    public static void invertRead(String [] folderNames, long days, String search) {
     	for(String folderName: folderNames) {
-    		invertindex(folderName,days, searchTerm);
+    		invertindex(folderName,days,search);
     	}
     }
    public static void main(String[] args) throws IOException {

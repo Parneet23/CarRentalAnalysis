@@ -1,5 +1,5 @@
 //
-package carRentalAnalysis;
+package CarRent;
 //
 //import java.io.BufferedWriter;
 //import java.io.FileWriter;

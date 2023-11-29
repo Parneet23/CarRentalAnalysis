@@ -1,4 +1,4 @@
-package carRentalAnalysis;
+package CarRent;
 
 import java.util.HashMap;
 import java.util.Map;

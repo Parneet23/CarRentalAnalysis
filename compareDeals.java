@@ -26,7 +26,7 @@ public class compareDeals {
     	for(String filePath: foldername) {
     		 String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
 
-             String cheapestCarDetails = findCheapestCar(fileContent,days, searchterms[1]);
+             String cheapestCarDetails = findCheapestCar(fileContent,days, searchterms[0]);
 
              System.out.println("The cheapest car rental option is:\n" + cheapestCarDetails);
     	}
@@ -47,7 +47,7 @@ public class compareDeals {
             double price = Double.parseDouble(matcher.group(4).trim());
 
             // Check if the details contain the search term
-            if (details.toLowerCase().contains(searchTerm.toLowerCase()) && price < minPrice) {
+            if (price < minPrice) {
                 minPrice = price;
                 cheapestCarDetails = "Website: " + website +
                         "\nPickup Location: " + pickupLocation +
