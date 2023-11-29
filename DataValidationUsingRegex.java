@@ -25,7 +25,7 @@ public class DataValidationUsingRegex {
 		return matcherObject.matches();
 	}
 
-	//method to return the difference in days between start and end date
+	// method to return the difference in days between start and end date
 	public static long calculateDays(Date startDate, Date endDate) {
 		long timeInMiliseconds = endDate.getTime() - startDate.getTime();
 		long days = TimeUnit.DAYS.convert(timeInMiliseconds, TimeUnit.MILLISECONDS);
@@ -58,26 +58,29 @@ public class DataValidationUsingRegex {
 					String inputStartDate = scanner.next();
 					// check if date format and date is correct for start date input
 					if (!dataValidator(inputStartDate) || !isDateCorrect(inputStartDate, "MM/dd/yyyy")) {
-						throw new DateException("Invalid Date for start date. Please enter correct date and in correct format.");
+						throw new DateException("Invalid Date for start date");
+					}
+					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+					Date currentDate = new Date();
+					Date startDate = sdf.parse(inputStartDate);
+
+					// condition to check if start date is before today's date
+					if (startDate.before(currentDate)) {
+						throw new DateException("Entered date should be greater than today's date");
 					}
 
 					System.out.println("Enter your  end date here: ");
 					String inputEndDate = scanner.next();
+					Date endDate = sdf.parse(inputEndDate);
 					// check if date format and date is correct for end date input
 					if (!dataValidator(inputEndDate) || !isDateCorrect(inputEndDate, "MM/dd/yyyy")) {
-						throw new DateException("Invalid Date for end date. Please enter correct date and in correct format.");
+						throw new DateException("Invalid Date for end date");
 					}
-					
-					
-					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-					Date currentDate = new Date();
-					Date startDate = sdf.parse(inputStartDate);
-					Date endDate = sdf.parse(inputEndDate);
 
-					System.out.println("Days diffence is : " + calculateDays(startDate,endDate) );
+					System.out.println("Days diffence is : " + calculateDays(startDate, endDate));
 					
 					// condition to check if start date and end date is before today's date
-					if (startDate.before(currentDate) || endDate.before(currentDate)) {
+					if (endDate.before(currentDate)) {
 						throw new DateException("Entered date should be greater than today's date");
 					}
 					
