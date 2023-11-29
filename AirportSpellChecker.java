@@ -1,4 +1,4 @@
-package com.company;
+package carRentalAnalysis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,7 +158,8 @@ class MySplayTree {
 }
 
 public class AirportSpellChecker {
-    private static void populateDictionary(MySplayTree dictionary) {
+	public static void populateDictionary(MySplayTree dictionary) {
+  //  private static void populateDictionary(MySplayTree dictionary) {
         dictionary.insert("windsor airport");
         dictionary.insert("toronto airport");
         dictionary.insert("vancouver international airport");
@@ -169,8 +170,8 @@ public class AirportSpellChecker {
         dictionary.insert("regina airport");
         dictionary.insert("london airport");
     }
-
-    private static List<String> findClosestMatchingWords(String input, MySplayTree dictionary, int maxDistanceThreshold, int maxMatches) {
+	public static List<String> findClosestMatchingWords(String input, MySplayTree dictionary, int maxDistanceThreshold, int maxMatches) {
+//    private static List<String> findClosestMatchingWords(String input, MySplayTree dictionary, int maxDistanceThreshold, int maxMatches) {
         List<String> closestMatches = new ArrayList<>(maxMatches);
         for (int i = 0; i < maxMatches; i++) {
             closestMatches.add("");

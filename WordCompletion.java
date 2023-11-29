@@ -1,4 +1,4 @@
-package com.company;
+package carRentalAnalysis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +123,8 @@ class MykSplayTreez {
 }
 
 public class WordCompletion {
-    private static void mykPopulateDictionary(MykSplayTreez dictionary) {
+	public static void mykPopulateDictionary(MykSplayTreez dictionary) {
+    //private static void mykPopulateDictionary(MykSplayTreez dictionary) {
         dictionary.mykInsert("Vancouver International Airport");
         dictionary.mykInsert("Montreal–Trudeau International Airport");
         dictionary.mykInsert("Ottawa International Airport");
@@ -136,7 +137,7 @@ public class WordCompletion {
         dictionary.mykInsert("Waterloo International Airport");
     }
 
-    private static List<String> mykWordCompletion(String prefix, MykSplayTreez dictionary) {
+    public static List<String> mykWordCompletion(String prefix, MykSplayTreez dictionary) {
         List<String> suggestions = new ArrayList<>();
         prefix = prefix.toLowerCase();
 
@@ -148,28 +149,28 @@ public class WordCompletion {
         return suggestions;
     }
 
-    public static void main(String[] args) {
-        MykSplayTreez splayTree = new MykSplayTreez();
-        mykPopulateDictionary(splayTree);
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.print("Enter a prefix for word completion (or 'exit' to quit): ");
-            String userInput = scanner.nextLine().trim().toLowerCase();
-            if (userInput.equals("exit")) {
-                System.out.println("Thank you for using Word Completion! Goodbye :)");
-                break;
-            }
-
-            List<String> completionSuggestions = mykWordCompletion(userInput, splayTree);
-            if (!completionSuggestions.isEmpty()) {
-                System.out.println("Word completion suggestions:");
-                for (String suggestion : completionSuggestions) {
-                    System.out.println(" - '" + suggestion + "'");
-                }
-            } else {
-                System.out.println("No suggestions found for the given prefix.");
-            }
-        }
-        scanner.close();
-    }
+//    public static void main(String[] args) {
+//        MykSplayTreez splayTree = new MykSplayTreez();
+//        mykPopulateDictionary(splayTree);
+//        Scanner scanner = new Scanner(System.in);
+//        while (true) {
+//            System.out.print("Enter a prefix for word completion (or 'exit' to quit): ");
+//            String userInput = scanner.nextLine().trim().toLowerCase();
+//            if (userInput.equals("exit")) {
+//                System.out.println("Thank you for using Word Completion! Goodbye :)");
+//                break;
+//            }
+//
+//            List<String> completionSuggestions = mykWordCompletion(userInput, splayTree);
+//            if (!completionSuggestions.isEmpty()) {
+//                System.out.println("Word completion suggestions:");
+//                for (String suggestion : completionSuggestions) {
+//                    System.out.println(" - '" + suggestion + "'");
+//                }
+//            } else {
+//                System.out.println("No suggestions found for the given prefix.");
+//            }
+//        }
+//        scanner.close();
+//    }
 }
