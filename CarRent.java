@@ -6,16 +6,18 @@ import java.util.Scanner;
 public class CarRent {
 	
 	 public static void main(String[]args) throws DateException {
+		 long days =0;
+		 String [] folderName= {"CarRent/avis/crawledTxt/txt","CarRent/budget/crawledTxt/txt","CarRent/enterprise/crawledTxt/txt"};
 		 try  {
-			 DataValidationUsingRegex.dateValidation();
+			days = DataValidationUsingRegex.dateValidation();
 		 } catch(DateException e) {
 			 System.out.println("Error: " + e.getMessage());
 		 }
 		 
-		 String [] folderName= {"CarRent/avis/crawledTxt/txt","CarRent/budget/crawledTxt/txt","CarRent/enterprise/crawledTxt/txt"};
+		 
 		 try {
 			ParserAndFrequencyCount.entryPoint();
-			InvertedIndexing.invertRead(folderName, "montreal");;
+			InvertedIndexing.invertRead(folderName, days,"Montreal Trudeau Intl Airport","BMW X1");;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

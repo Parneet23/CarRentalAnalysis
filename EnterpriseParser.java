@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Dictionary;
 import java.util.Vector;
+import java.util.Set;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,7 +16,7 @@ import org.jsoup.select.Elements;
 
 
 public class EnterpriseParser {
-	public void convertFileToWebPage (File folder, String filename, Dictionary dict, int key) {
+	public void convertFileToWebPage (File folder, String filename, Dictionary dict, int key, Set set) {
 		try {
 			//location from where we need to access the file
 			String loc=folder+"\\"+filename;
@@ -57,6 +58,7 @@ public class EnterpriseParser {
 		    	 freqCount.carType=summary_containers.get(itr).select("h2").text();
 		    	 output += summary_containers.get(itr).getElementsByClass("vehicle-item__models").text() + "\n";
 		    	 freqCount.carModel=summary_containers.get(itr).getElementsByClass("vehicle-item__models").text();
+                         set.add(freqCount.carModel);
 		    	 Elements unordered_list=summary_containers.get(itr).getElementsByClass("vehicle-item__attributes");
 		    	 Elements list = unordered_list.select("li");
 		    	 output += "4 Doors\n";
@@ -96,13 +98,13 @@ public class EnterpriseParser {
 		}
 		
 	}
-	public void listFileNameForFolder(File folder, Dictionary dict, int key) throws IOException {
+	public void listFileNameForFolder(File folder, Dictionary dict, int key, Set set) throws IOException {
 		//Iterating the folder and parsing files present inside the folder 
 		for (File fileName : folder.listFiles()) {
 	        if (fileName.isDirectory()) {
 	        	continue;
 	        } else {
-	        	 convertFileToWebPage(folder,fileName.getName(),dict, key);
+	        	 convertFileToWebPage(folder,fileName.getName(),dict, key, set);
 	            
 	        }
 	    }

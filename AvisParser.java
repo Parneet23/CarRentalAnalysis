@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Set;
+import java.util.Vector;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,7 +18,7 @@ import org.jsoup.select.Elements;
 
 public class AvisParser {
 	
-    public void parseAvisWebsite (File folder, String filename, Dictionary dict, int key) {
+    public void parseAvisWebsite (File folder, String filename, Dictionary dict, int key, Set set) {
 		try {
 			//location from where we need to access the file
 			String loc=folder+"\\"+filename;
@@ -60,6 +62,7 @@ public class AvisParser {
 			    freqCount.carType=car_option.get(itr).select("h3").text();
 		    	output += car_option.get(itr).getElementsByClass("featurecartxt similar-car").text() + "\n";
 		    	freqCount.carModel=car_option.get(itr).getElementsByClass("featurecartxt similar-car").text();
+                        set.add(freqCount.carModel);
 		    	output += facilities.get(itr1).getElementsByClass("four-door-feat").text() + "\n";
 		    	output += facilities.get(itr1).getElementsByClass("four-seats-feat").text() + "\n";
 		    	String str=facilities.get(itr1).getElementsByClass("four-seats-feat").text();
@@ -106,7 +109,7 @@ public class AvisParser {
 		}
 	}
     //This method is iterating all the files present inside the folder and calling parse method for parsing the information which is required
-	public void listFileNameForFolder(File folder, Dictionary dictObject, int key) throws IOException {
+	public void listFileNameForFolder(File folder, Dictionary dictObject, int key, Set set) throws IOException {
 		//Iterating the folder and parsing files present inside the folder 
 		for (File fileName : folder.listFiles()) {
 	        if (fileName.isDirectory()) {
@@ -114,7 +117,7 @@ public class AvisParser {
 	        	continue;
 	        } else {
 	        	//for each file parsing
-	        	parseAvisWebsite(folder,fileName.getName(), dictObject, key);
+	        	parseAvisWebsite(folder,fileName.getName(), dictObject, key, set);
 	            
 	        }
 	    }

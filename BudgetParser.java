@@ -7,13 +7,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Dictionary;
+import java.util.Set;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class BudgetParser {
-	public void convertFileToWebPage (File folder, String filename, Dictionary dict, int key) {
+	public void convertFileToWebPage (File folder, String filename, Dictionary dict, int key, Set set) {
 		try {
 			//location from where we need to access the file
 			String loc=folder+"\\"+filename;
@@ -57,6 +58,7 @@ public class BudgetParser {
 		    	freqCount.carType = car_option.get(itr).select("h4").text();
 		    	output += car_option.get(itr).getElementsByClass("feat-car-text-mob").text() + "\n";
 		    	freqCount.carModel = car_option.get(itr).getElementsByClass("feat-car-text-mob").text();
+                        set.add(freqCount.carModel);
 		    	output += price.get(itr1).select("p").text();
 		    	try {
 		    		String value = price.get(itr1).select("p").text();
@@ -108,13 +110,13 @@ public class BudgetParser {
 	
 		
 	}
-	public void listFileNameForFolder(File folder, Dictionary dict, int key) throws IOException {
+	public void listFileNameForFolder(File folder, Dictionary dict, int key, Set set) throws IOException {
 		//Iterating the folder and parsing files present inside the folder 
 		for (File fileName : folder.listFiles()) {
 	        if (fileName.isDirectory()) {
 	        	continue;
 	        } else {
-	        	convertFileToWebPage(folder,fileName.getName(), dict, key);
+	        	convertFileToWebPage(folder,fileName.getName(), dict, key, set);
 	            
 	        }
 	    }

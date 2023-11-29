@@ -2,8 +2,12 @@ package CarRent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,35 +20,90 @@ public class DataValidationUsingRegex {
 	// Takes date input in a string as a parameter
 	// Returns true if date matches the pattern else false
 	public static boolean dataValidator(String date) {
-	    Pattern patternObject = Pattern.compile(DATE_FORMAT_REGEX);
-	    Matcher matcherObject = patternObject.matcher(date);
-	    return matcherObject.matches();
+		Pattern patternObject = Pattern.compile(DATE_FORMAT_REGEX);
+		Matcher matcherObject = patternObject.matcher(date);
+		return matcherObject.matches();
 	}
 
-	//main method
-	public static void dateValidation() throws DateException {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Enter your date here: ");
-            String inputDate = scanner.next();
-            try {
-                if (!dataValidator(inputDate)) {
-                    throw new DateException("Invalid Date Format");
-                }
+	// method to return the difference in days between start and end date
+	public static long calculateDays(Date startDate, Date endDate) {
+		long timeInMiliseconds = endDate.getTime() - startDate.getTime();
+		long days = TimeUnit.DAYS.convert(timeInMiliseconds, TimeUnit.MILLISECONDS);
+		 return days;
+	}
 
-                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-                Date currentDate = new Date();
-                Date enteredDate = sdf.parse(inputDate);
+	// method to validate the date if it's correct
+	// accepts date and date format as input
+	// returns true if correct else false
+	public static boolean isDateCorrect(String dateTobeValidated, String dateFormat) {
+		try {
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
 
-                if (enteredDate.before(currentDate)) {
-                    throw new DateException("Entered date should be greater than today's date");
-                }
+			LocalDate localDate = LocalDate.parse(dateTobeValidated, dateFormatter);
 
-                break; // Break out of the loop if a valid and future date is entered
-            } catch (DateException | ParseException e) {
-                System.out.println(e.getMessage());
-                // Continue the loop to prompt the user again
-            }
-        }
+			return localDate.format(dateFormatter).equals(dateTobeValidated);
+
+		} catch (DateTimeParseException dateException) {
+
+			return false;
+		}
+	}
+
+	// main method
+	public static long dateValidation() throws DateException {
+		long days;
+		try (Scanner scanner = new Scanner(System.in)) {
+			while (true) {
+				try {
+					System.out.println("Enter your start date here: ");
+					String inputStartDate = scanner.next();
+					// check if date format and date is correct for start date input
+					if (!dataValidator(inputStartDate) || !isDateCorrect(inputStartDate, "MM/dd/yyyy")) {
+						throw new DateException("Invalid Date for start date");
+					}
+					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+					Date currentDate = new Date();
+					Date startDate = sdf.parse(inputStartDate);
+
+					// condition to check if start date is before today's date
+					if (startDate.before(currentDate)) {
+						throw new DateException("Entered date should be greater than today's date");
+					}
+
+					System.out.println("Enter your  end date here: ");
+					String inputEndDate = scanner.next();
+					Date endDate = sdf.parse(inputEndDate);
+					// check if date format and date is correct for end date input
+					if (!dataValidator(inputEndDate) || !isDateCorrect(inputEndDate, "MM/dd/yyyy")) {
+						throw new DateException("Invalid Date for end date");
+					}
+
+					
+					
+					// condition to check if start date and end date is before today's date
+					if (endDate.before(currentDate)) {
+						throw new DateException("Entered date should be greater than today's date");
+					}
+					
+					// condition to check if end date is before start date
+					if (endDate.before(startDate)) {
+						throw new DateException("Start date should be less than End date");
+					}
+
+					// when every check is passed, print success
+					days =calculateDays(startDate, endDate);
+					break;
+					
+					
+					//System.out.println("Successfully validated the data!!");
+
+					
+				} catch (DateException | ParseException e) {
+					System.out.println(e.getMessage());
+				}
+			
+			}
+			return days;
+		}
 	}
 }

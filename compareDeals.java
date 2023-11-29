@@ -15,24 +15,24 @@ public class compareDeals {
             String filePath = "CarRent/montreal.txt"; // Update this with the actual path to your text file
             String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
 
-            String cheapestCarDetails = findCheapestCar(fileContent);
+          //  String cheapestCarDetails = findCheapestCar(fileContent,days,"Chevrolet Malibu");
 
-            System.out.println("The cheapest car rental option is:\n" + cheapestCarDetails);
+            //System.out.println("The cheapest car rental option is:\n" + cheapestCarDetails);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static void bestdeals(List<String>foldername) throws IOException {
+    public static void bestdeals(List<String>foldername,long days, String...searchterms) throws IOException {
     	for(String filePath: foldername) {
     		 String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
 
-             String cheapestCarDetails = findCheapestCar(fileContent);
+             String cheapestCarDetails = findCheapestCar(fileContent,days, searchterms[1]);
 
              System.out.println("The cheapest car rental option is:\n" + cheapestCarDetails);
     	}
     }
 
-    public static String findCheapestCar(String fileContent) {
+    public static String findCheapestCar(String fileContent,long days, String searchTerm) {
         Pattern pattern = Pattern.compile("(?s)Pick up location: ([^\n]+).*?https://([^\n]+)\\n(.*?)C\\$(\\d+\\.\\d{2})");
 
         Matcher matcher = pattern.matcher(fileContent);
@@ -46,12 +46,13 @@ public class compareDeals {
             String details = matcher.group(3).trim();
             double price = Double.parseDouble(matcher.group(4).trim());
 
-            if (price < minPrice) {
+            // Check if the details contain the search term
+            if (details.toLowerCase().contains(searchTerm.toLowerCase()) && price < minPrice) {
                 minPrice = price;
                 cheapestCarDetails = "Website: " + website +
                         "\nPickup Location: " + pickupLocation +
                         "\nDetails: " + details +
-                        "\nPrice: C$" + price;
+                        "\nPrice: C$" + price * days;
             }
         }
 
@@ -61,6 +62,7 @@ public class compareDeals {
 
         return cheapestCarDetails;
     }
+
 
 
 
