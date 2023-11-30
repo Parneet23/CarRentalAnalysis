@@ -53,9 +53,9 @@ public class ParserAndFrequencyCount {
 		String outFile=location+ "\\" + "count.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(outFile));
 		String output="";
-		output += "https://www.enterprise.ca  : " + enterprise + "\n";
-		output += "https://www.budget.ca :  " + budget + "\n";
-		output += "https://www.avis.ca :  " + avis + "\n"; 
+		output += "https://www.enterprise.ca  = " + enterprise + "\n";
+		output += "https://www.budget.ca =  " + budget + "\n";
+		output += "https://www.avis.ca =  " + avis + "\n"; 
 		bw.write(output);
 	    bw.close();
 	}
