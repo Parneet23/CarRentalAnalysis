@@ -198,7 +198,7 @@ public class InvertedIndexing implements Serializable {
     public void saveDataStructure(String filePath) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
             oos.writeObject(root);
-            System.out.println("Inverted index data structure saved successfully.");
+           // System.out.println("Inverted index data structure saved successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -281,7 +281,7 @@ public class InvertedIndexing implements Serializable {
         String searchTerm = "Montreal Trudeau International Airport";
         List<String> result = invertedIndex.search1(searchTerm.toLowerCase(),"Audi Q7");
 
-        System.out.println("Documents containing the term '" + searchTerm + "': " + result);
+     //   System.out.println("Documents containing the term '" + searchTerm + "': " + result);
 
         // Load the saved inverted index data structure
         TrieNode loadedDataStructure = invertedIndex.loadDataStructure("CarRent/inverted_index_data_structure.ser");

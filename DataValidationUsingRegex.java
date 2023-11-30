@@ -102,17 +102,17 @@ public class DataValidationUsingRegex {
 					
 					
 					//System.out.println("Successfully validated the data!!");
-
+					
 					
 				} catch (DateException | ParseException e) {
 					System.out.println(e.getMessage());
 					//scanner.close();
 				}
 			
-				return du;
+				
 			//scanner.close();
 			
 		}
-			return du;
+		return du;
 	}
 }

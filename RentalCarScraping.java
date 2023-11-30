@@ -377,20 +377,23 @@ public class RentalCarScraping {
      // Locate the element you want to click
         WebElement selectLocation = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div[7]/div/div/div[1]/div/div/div[2]/section/div/div/div[3]/div/div[2]/div/form/div/div[1]/div/div[1]/div[2]/div[2]/ul/li/small"));
         selectLocation.click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
+        WebElement close = driver.findElement(By.xpath("/html/body/div[7]/div[2]/div/div[2]/button"));
+        close.click();
         
-        WebElement enterpriseBrowse = driver.findElement(By.xpath("//*[@id='continueButton']"));
-        Actions actions = new Actions(driver);
-        actions.click(enterpriseBrowse).build().perform();
-        Thread.sleep(50000);
+        WebElement enterpriseBrowse = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div[7]/div/div/div[1]/div/div/div[2]/section/div/div/div[3]/div/div[2]/div/div/div[4]/button"));
+        enterpriseBrowse.click();
+        //Actions actions = new Actions(driver);
+        //actions.click(enterpriseBrowse).build().perform();
+        //Thread.sleep(20000);
 //        driver.findElement(By.id("1006474")).click();
 //       driver.findElement(By.xpath("//button[@id='continueButton']")).click();
 //        
  //        Perform a Google search
        
-        Thread.sleep(15000);
+        Thread.sleep(5000);
         // Wait for the search results to load (you may need to add explicit waits)
-        WebElement html = driver.findElement(By.xpath("//body//div[3]//div[1]//div[1]//div[2]//main[1]//div[1]//section[1]//ul[1]"));
+        WebElement html = driver.findElement(By.xpath("/html/body/div[3]/div[1]/div/div[2]/main/div/section/ul"));
         String elementHTML = html.getAttribute("outerHTML");
 		System.out.println(elementHTML);
 		return elementHTML;

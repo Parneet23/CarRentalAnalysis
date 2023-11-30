@@ -62,7 +62,7 @@ public class PageRanking {
 	}
 
 	// main method
-	public static void main(String[] args) {
+	public static void pageRanking() {
 
 		int totalWebsites = 3, i = 0;
 		PageRanking[] pageRanker = new PageRanking[totalWebsites];

@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class GenerateScrapedDataFile {
 
-    private static final String BASE_PATH = "D:\\SEM1\\ACC\\project\\pages\\";
+    private static final String BASE_PATH = "CarRent/";
     private static final String FILE_EXTENSION = ".txt";
 
     private String filePath;
@@ -25,7 +25,7 @@ public class GenerateScrapedDataFile {
         // Convert the company name to lowercase for consistency
         String lowercaseCompany = company.toLowerCase();
         String lowercaseLocation = location.toLowerCase();
-        this.filePath = BASE_PATH + lowercaseCompany +"\\"+lowercaseLocation+ FILE_EXTENSION;
+        this.filePath = BASE_PATH + lowercaseCompany +"/crawledTxt/"+lowercaseLocation+ FILE_EXTENSION;
     }
 
     public void scrapeAndWriteData(String dataToWrite) {
@@ -53,7 +53,7 @@ public class GenerateScrapedDataFile {
 ////        String dataToWrite = scanner.nextLine();
 //
 //        // Create an instance of RentalCarScraping with user input
-//       // RentalCarScraping scraper = new RentalCarScraping(company);
+//       RentalCarScraping scraper = new RentalCarScraping(company);
 //
 //        // Call the method to scrape and write data
 //        scraper.scrapeAndWriteData(scraper.dataToWrite);

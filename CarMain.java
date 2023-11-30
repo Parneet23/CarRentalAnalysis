@@ -31,18 +31,25 @@ public class CarMain {
 		    MySplayTree airportDictionary = new MySplayTree();
 		    AirportSpellChecker airportSpellChecker = new AirportSpellChecker();
 //		    SearchCount searchCount = new SearchCount();
-
+		    String userInput ="";
 		    initializeDictionaries(splayTree, airportDictionary, wordCompletion, airportSpellChecker);
 
-		    String userInput = getUserLocationInput(scanner);
+		   
 		    
 		    
-		    du = getUserPickUpDateInput(du);
+		    
 		   // String dropDateInput = getUserDropDateInput();
 
 		    if (shouldProceedWithAvailableData(scanner)) {
-		        processExistingData(scanner, wordCompletion, splayTree, airportDictionary, airportSpellChecker, userInput);
+		    	userInput = getUserLocationInput(scanner);
+		    	processExistingData(scanner, wordCompletion, splayTree, airportDictionary, airportSpellChecker, userInput);
+		    	
+		        
 		    } else {
+		    	userInput = getUserLocationInput(scanner);
+		    	userInput = processUnexistingData(scanner, wordCompletion, splayTree, airportDictionary, airportSpellChecker, userInput);
+		    	du = getUserPickUpDateInput(du);
+		    	
 		        RentalCarScraping crawler = new RentalCarScraping(userInput,du.getStartdate(),du.getEndDate());
 		        generateAndScrapeDataFiles(crawler, userInput);
 		    }
@@ -84,34 +91,73 @@ public class CarMain {
 		        MykSplayTreez splayTree,
 		        MySplayTree airportDictionary,
 		        AirportSpellChecker airportSpellChecker,
-		        String userInput) {
-		    List<String> completionSuggestions = getWordCompletionSuggestions(wordCompletion, splayTree, userInput);
+		        String userInput) throws DateException {
+			String [] folderName= {"CarRent/avis/crawledTxt/txt","CarRent/budget/crawledTxt/txt","CarRent/enterprise/crawledTxt/txt"};
+		    List<String> completionSuggestions = getWordCompletionSuggestions(wordCompletion, splayTree, userInput,scanner);
 		    if (!completionSuggestions.isEmpty()) {
-		        displayWordCompletionSuggestions(completionSuggestions);
+		        if(displayWordCompletionSuggestions(completionSuggestions)) {
+		        	userInput =handleUserSelectionCompletion(scanner,completionSuggestions,userInput,splayTree);
+		        };
+		        
 		    } else {
-		        handleSpellChecking(scanner, airportDictionary, airportSpellChecker, userInput);
+		        userInput = handleSpellChecking(scanner, airportDictionary, airportSpellChecker, userInput);
 		    }
+		    du = getUserPickUpDateInput(du);
+		    try {
+				ParserAndFrequencyCount.entryPoint();
+				PageRanking.pageRanking();
+				InvertedIndexing.invertRead(folderName, du.getIntervals(),userInput);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    System.out.println("Location is: " + userInput);
+		}
+		private static String processUnexistingData(
+		        Scanner scanner,
+		        WordCompletion wordCompletion,
+		        MykSplayTreez splayTree,
+		        MySplayTree airportDictionary,
+		        AirportSpellChecker airportSpellChecker,
+		        String userInput) throws DateException {
+			String [] folderName= {"CarRent/avis/crawledTxt/txt","CarRent/budget/crawledTxt/txt","CarRent/enterprise/crawledTxt/txt"};
+		    List<String> completionSuggestions = getWordCompletionSuggestions(wordCompletion, splayTree, userInput,scanner);
+		    if (!completionSuggestions.isEmpty()) {
+		        if(displayWordCompletionSuggestions(completionSuggestions)) {
+		        	userInput =handleUserSelectionCompletion(scanner,completionSuggestions,userInput,splayTree);
+		        };
+		        
+		    } else {
+		        userInput = handleSpellChecking(scanner, airportDictionary, airportSpellChecker, userInput);
+		    }
+		    
+		   return userInput;
 		}
 
-		private static List<String> getWordCompletionSuggestions(WordCompletion wordCompletion, MykSplayTreez splayTree, String userInput) {
+		private static List<String> getWordCompletionSuggestions(WordCompletion wordCompletion, MykSplayTreez splayTree, String userInput, Scanner scanner) {
 		    List<String> completionSuggestions = wordCompletion.mykWordCompletion(userInput, splayTree);
-		    displayWordCompletionSuggestions(completionSuggestions);
+		     
+		    
 		    return completionSuggestions;
 		}
 
-		private static void displayWordCompletionSuggestions(List<String> completionSuggestions) {
+		private static boolean displayWordCompletionSuggestions(List<String> completionSuggestions) {
 			
 		    if (!completionSuggestions.isEmpty()) {
 		        System.out.println("Word completion suggestions:");
-		        for (String suggestion : completionSuggestions) {
-		            System.out.println(" - '" + suggestion + "'");
-		        }
+		        for (int i = 0; i < completionSuggestions.size(); i++) {
+			        System.out.println((i + 1) + ". " + completionSuggestions.get(i));
+			        
+			    }
+		        return true;
+		        
 		    } else {
 		        System.out.println("No suggestions found for the given prefix.");
+		        return false;
 		    }
 		}
 
-		private static void handleSpellChecking(
+		private static String handleSpellChecking(
 		        Scanner scanner,
 		        MySplayTree airportDictionary,
 		        AirportSpellChecker airportSpellChecker,
@@ -120,17 +166,19 @@ public class CarMain {
 		        System.out.println("The airport name '" + userInput + "' is spelled correctly.");
 		    } else {
 		        List<String> suggestions = airportSpellChecker.findClosestMatchingWords(userInput, airportDictionary, 12, 3);
-		        handleSuggestions(scanner, userInput, suggestions,airportDictionary);
+		        userInput = handleSuggestions(scanner, userInput, suggestions,airportDictionary);
 		    }
+		    return userInput;
 		}
 
-		private static void handleSuggestions(Scanner scanner, String userInput, List<String> suggestions,MySplayTree airportDictionary) {
+		private static String handleSuggestions(Scanner scanner, String userInput, List<String> suggestions,MySplayTree airportDictionary) {
 		    if (!suggestions.isEmpty()) {
 		        displaySpellCheckSuggestions(userInput, suggestions);
-		        handleUserSelection(scanner, suggestions, userInput,airportDictionary);
+		        userInput = handleUserSelection(scanner, suggestions, userInput,airportDictionary);
 		    } else {
 		        System.out.println("The airport name '" + userInput + "' is not found in the database.");
 		    }
+		    return userInput;
 		}
 
 		private static void displaySpellCheckSuggestions(String userInput, List<String> suggestions) {
@@ -141,8 +189,8 @@ public class CarMain {
 		    System.out.println((suggestions.size() + 1) + ". Word not found, add in the dictionary");
 		}
 
-		private static void handleUserSelection(Scanner scanner, List<String> suggestions, String userInput,MySplayTree airportDictionary) {
-			String [] folderName= {"CarRent/avis/crawledTxt/txt","CarRent/budget/crawledTxt/txt","CarRent/enterprise/crawledTxt/txt"};
+		private static String handleUserSelection(Scanner scanner, List<String> suggestions, String userInput,MySplayTree airportDictionary) {
+			
 			SearchCount searchCount = new SearchCount();
 		    System.out.print("Please select a suggestion: ");
 		    int suggestionInput = scanner.nextInt();
@@ -152,14 +200,21 @@ public class CarMain {
 		        userInput = suggestions.get(suggestionInput - 1);
 		    }
 		    searchCount.performSearchCounts(userInput);
-		    try {
-				ParserAndFrequencyCount.entryPoint();
-				InvertedIndexing.invertRead(folderName, du.getIntervals(),userInput);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    System.out.println("Location is: " + userInput);
+		    return userInput;
+		}
+		private static String handleUserSelectionCompletion(Scanner scanner, List<String> suggestions, String userInput,MykSplayTreez airportDictionary) {
+			
+			SearchCount searchCount = new SearchCount();
+		    System.out.print("Please select a suggestion: ");
+		    int suggestionInput = scanner.nextInt();
+		    if (suggestionInput == suggestions.size() + 1) {
+		        airportDictionary.mykInsert(userInput);
+		    } else {
+		        userInput = suggestions.get(suggestionInput - 1);
+		       
+		    }
+		    searchCount.performSearchCounts(userInput);
+		    return userInput;
 		}
 
 		private static void generateAndScrapeDataFiles(RentalCarScraping crawler, String userInput) throws InterruptedException {
