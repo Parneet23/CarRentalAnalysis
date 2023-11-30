@@ -1,4 +1,4 @@
-package carRentalAnalysis;
+package CarRent;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class SearchCount {
 	
-	private static final String FILE_PATH = "D:\\SEM1\\ACC\\project\\searchCount\\searchCount.txt";
+	private static final String FILE_PATH = "CarRent/searchCount.txt";
     private Map<String, Integer> searchCountMap;
     //private Scanner scanner;
 
