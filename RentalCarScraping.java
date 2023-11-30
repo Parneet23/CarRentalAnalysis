@@ -304,6 +304,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import carRentalAnalysis.RentalCarScraping;
+
 /**
  * Scraping developed by:
  * Name: Talha Haseeb Mohammed
@@ -400,33 +402,35 @@ public class RentalCarScraping {
 	}
 
 	
-	public String avisSearch(RentalCarScraping crawler,WebDriver driver) throws InterruptedException {
-		driver.get("https://www.avis.com/");
-		Thread.sleep(10000);
-		//driver.manage().window().maximize();
-//		WebElement modalDialog = driver.findElement(By.xpath("/html/body/div[18]/div[3]/div/div"));
-//		modalDialog.findElement(By.xpath("/html/body/div[18]/div[3]/div/div/div/div[2]/form/div[3]/div[4]/button")).click();
-//		
-//		Thread.sleep(10000);
-		WebElement location = driver.findElement(By.xpath("//*[@id='PicLoc_value']"));
-		location.sendKeys(crawler.getLocation());
-		WebElement budgetFromDate = driver.findElement(By.xpath("//*[@id='from']"));
-		budgetFromDate.sendKeys(crawler.getPickupDate());
-		WebElement budgetToDate = driver.findElement(By.xpath("//*[@id='to']"));
-		budgetToDate.sendKeys(crawler.getDropDate());
-		WebElement search = driver.findElement(By.xpath("//*[@id='res-home-select-car']"));
-		search.click();
-		Thread.sleep(19000);
-		
-		WebElement modalDialog = driver.findElement(By.xpath("/html/body/div[6]/div[1]/div[3]/div[1]/footer/div[3]/div/div[1]/div/div/div[2]/div[2]/ul/li[1]/div[2]/a"));
-		//modalDialog.findElement(By.xpath("/html/body/div[6]/div[1]/div[3]/div[1]/footer/div[3]/div/div[1]/div/div/div[2]/div[2]/ul/li[1]/div[2]/a")).click();
-		modalDialog.click();
-		Thread.sleep(15000);
-		WebElement html = driver.findElement(By.xpath("/html/body/div[6]/div[2]/div[1]/div/div/div[2]/div[1]/section[3]/div[1]"));
-		System.out.println(html.getAttribute("outerHTML"));
-		return html.getAttribute("outerHTML");
-		
-	}
+	public void avisSearch(RentalCarScraping crawler,WebDriver driver) throws InterruptedException {
+		//public String avisSearch(RentalCarScraping crawler,WebDriver driver) throws InterruptedException {
+			driver.get("https://www.avis.com/");
+			Thread.sleep(10000);
+			//driver.manage().window().maximize();
+//			WebElement modalDialog = driver.findElement(By.xpath("/html/body/div[18]/div[3]/div/div"));
+//			modalDialog.findElement(By.xpath("/html/body/div[18]/div[3]/div/div/div/div[2]/form/div[3]/div[4]/button")).click();
+//			
+//			Thread.sleep(10000);
+			WebElement location = driver.findElement(By.xpath("//*[@id='PicLoc_value']"));
+			location.sendKeys(crawler.getLocation());
+			WebElement budgetFromDate = driver.findElement(By.xpath("//*[@id='from']"));
+			budgetFromDate.sendKeys(crawler.getPickupDate());
+			WebElement budgetToDate = driver.findElement(By.xpath("//*[@id='to']"));
+			budgetToDate.sendKeys(crawler.getDropDate());
+			WebElement search = driver.findElement(By.xpath("//*[@id='res-home-select-car']"));
+			search.click();
+			Thread.sleep(19000);
+			
+			//WebElement modalDialog = driver.findElement(By.xpath("/html/body/div[6]/div[1]/div[3]/div[1]/footer/div[3]/div/div[1]/div/div/div[2]/div[2]/ul/li[1]/div[2]/a"));
+			WebElement modalDialog = driver.findElement(By.xpath("/html/body/div[4]/div[6]/div[1]/footer/div[3]/div/div[1]/div/div"));
+			modalDialog.findElement(By.xpath("/html/body/div[4]/div[6]/div[1]/footer/div[3]/div/div[1]/div/div/div[2]/div[2]/ul/li[1]/div[2]/a")).click();
+			//modalDialog.click();
+			Thread.sleep(15000); 
+			WebElement html = driver.findElement(By.xpath("/html/body/div[5]/div[2]/div[1]/div/div/div[2]/div[1]/section[3]/div[1]"));
+			System.out.println(html.getAttribute("outerHTML"));
+			//return html.getAttribute("outerHTML");
+			
+		}
 	
 	 private static Date parseDate(String dateStr) {
 	        try {
